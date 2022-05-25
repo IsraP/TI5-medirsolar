@@ -1,0 +1,6 @@
+data/AppDAO.class
+config/DBConnector.class
+data/DAO.class
+model/Medicao.class
+app/ArduinoMessageProcessor.class
+app/DataConsolidator.class
