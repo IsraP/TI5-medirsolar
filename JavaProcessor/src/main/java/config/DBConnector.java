@@ -28,6 +28,7 @@ public class DBConnector {
                 settings.put(Environment.SHOW_SQL, "false");
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
                 settings.put(Environment.HBM2DDL_AUTO, "validate");
+                settings.put(Environment.JDBC_TIME_ZONE, "America/Araguaina");
 
                 configuration.setProperties(settings);
 

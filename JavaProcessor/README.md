@@ -1,1 +1,0 @@
-# TI5-medirsolar

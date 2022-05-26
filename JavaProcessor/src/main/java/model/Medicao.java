@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "medicao")
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @ToString
 public class Medicao {
 
-    public Medicao(LocalDateTime data, String unidade, float temperatura, float umidade) {
+    public Medicao(ZonedDateTime data, String unidade, float temperatura, float umidade) {
         this.data = data;
         this.unidade = unidade;
         this.temperatura = temperatura;
@@ -26,7 +26,7 @@ public class Medicao {
     public int id;
 
     @Column(name = "data")
-    public LocalDateTime data;
+    public ZonedDateTime data;
 
     @Column(name="unidade")
     public String unidade;
