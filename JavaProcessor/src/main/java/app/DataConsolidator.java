@@ -36,7 +36,7 @@ public class DataConsolidator {
         String dataStr;
 
         try{
-            while(secs != 0){
+            while(true){
                 dataStr = mountString();
                 Medicao m = processData(dataStr);
 
