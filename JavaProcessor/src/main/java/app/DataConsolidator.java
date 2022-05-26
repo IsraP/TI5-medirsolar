@@ -5,7 +5,10 @@ import jssc.SerialPort;
 import jssc.SerialPortException;
 import model.Medicao;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 public class DataConsolidator {
     static SerialPort sp;
@@ -35,9 +38,7 @@ public class DataConsolidator {
         try{
             while(secs != 0){
                 dataStr = mountString();
-                System.out.println(dataStr + " TESTE " + (dataStr != null? dataStr.length() : 0));
                 Medicao m = processData(dataStr);
-                System.out.println(m);
 
                 if(m != null)
                     medicaoDAO.insert(m);
@@ -65,7 +66,7 @@ public class DataConsolidator {
                     hasData = true;
                     continue;
                 }
-                else if(c.length() == 1 && c.charAt(0) == '&') { // O "&" marca o final de uma linha
+                else if(hasData && c.length() == 1 && c.charAt(0) == '&') { // O "&" marca o final de uma linha
                     hasData = false;
                     hasObtained = true;
                 }
@@ -91,7 +92,10 @@ public class DataConsolidator {
         if(splitData.length < 3)
             return null;
 
-        return new Medicao(LocalDateTime.now(), splitData[0], Float.parseFloat(splitData[1]), Float.parseFloat(splitData[2]));
+        Instant now = Instant.now();
+        ZoneId zoneId = ZoneId.of("America/Sao_Paulo");
+
+        return new Medicao(ZonedDateTime.ofInstant(now, zoneId), splitData[0], Float.parseFloat(splitData[1]), Float.parseFloat(splitData[2]));
     }
 
 }
