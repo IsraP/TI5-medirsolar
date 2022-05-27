@@ -36,8 +36,7 @@ module.exports = {
     async MinMaxAtual(request, response) {
         const { unidade = 's' } = request.query;
         var hj = new Date(Date.now());
-        hj.setHours(0, 0, 0, 0)
-        console.log(hj)
+        hj.setHours(1, 0, 0, 0)
         const valores = await connection.pool.query(`select * from medicao 
         where data > '${hj.toISOString()}' 
         AND unidade = '${unidade}' order by data desc`)
