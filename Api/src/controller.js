@@ -40,7 +40,7 @@ module.exports = {
         var hj = moment().format()
         console.log(hj)
         const valores = await connection.pool.query(`select * from medicao 
-        where data > '${hj.to()}' 
+        where data > '${hj}' 
         AND unidade = '${unidade}' order by data desc`)
         if (valores.length > 0) {
 
