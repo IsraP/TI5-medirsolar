@@ -38,13 +38,10 @@ module.exports = {
         const { unidade = 's' } = request.query;
         process.env.TZ = 'America/Sao_Paulo'; // UTC +00:00
         var hj = moment().format("YYYY-MM-DD 00:00:00.000")
-        console.log(hj)
         const valores = await connection.pool.query(`select * from medicao 
         where data > '${hj}' 
         AND unidade = '${unidade}' order by data desc`)
         if (valores.length > 0) {
-
-
             const Metricas = {
                 tempUmiAtual: valores[0],
                 tempMaior: null,
@@ -76,10 +73,8 @@ module.exports = {
 
     async Intevalo(request, response) {
         const { dias = 1 } = request.query;
-        var hj =  moment()
-        var dataFim =  moment("")
-        dataFim.setDate(hj.getDate() - dias);
-        console.log(hj.toISOString());
+        var hj =  moment().format("YYYY-MM-DD 00:00:00.000")
+        var dataFim =  moment().day(hj.day-dias).format("YYYY-MM-DD 00:00:00.000")
 
         const valores = await connection.pool.query(`
             SELECT MAX(temperatura) as tempMaior, 
@@ -88,7 +83,7 @@ module.exports = {
             MIN(umidade) as umiMenor, 
             DATE(data) as dia
             from medicao
-            WHERE data > '${dataFim.toISOString()}'
+            WHERE data > '${dataFim}'
             group by DATE(data) , unidade`
         )
         return response.json(
