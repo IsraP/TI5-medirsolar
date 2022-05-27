@@ -80,7 +80,8 @@ module.exports = {
             MIN(temperatura) as tempMenor, 
             MAX(umidade) as umiMaior, 
             MIN(umidade) as umiMenor, 
-            DATE(data) as dia
+            DATE(data) as dia,
+            unidade
             from medicao
             WHERE data > '${dataFim}'
             group by DATE(data) , unidade`
