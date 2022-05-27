@@ -36,6 +36,7 @@ module.exports = {
     },
     async MinMaxAtual(request, response) {
         const { unidade = 's' } = request.query;
+        process.env.TZ = 'America/Sao_Paulo'; // UTC +00:00
         var hj = new Date();
         hj.setHours(0, 0, 0, 0)
         console.log(hj)
@@ -76,6 +77,7 @@ module.exports = {
 
     async Intevalo(request, response) {
         const { dias = 1 } = request.query;
+        process.env.TZ = 'America/Sao_Paulo'; // UTC +00:00
         var hj = new Date();
         var dataFim = new Date();
         hj.setHours(-3, 0, 0, 0)
