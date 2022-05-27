@@ -75,8 +75,6 @@ module.exports = {
         const { dias = 1 } = request.query;
         var hj =  moment();
         var dataFim =  moment().day(hj.day()-dias).format("YYYY-MM-DD 00:00:00.000")
-        console.log(hj)
-        con
         const valores = await connection.pool.query(`
             SELECT MAX(temperatura) as tempMaior, 
             MIN(temperatura) as tempMenor, 
