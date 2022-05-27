@@ -1,5 +1,4 @@
 const connection = require('./database')
-process.env.TZ = 'America/Sao_Paulo'; // UTC +00:00
 
 module.exports = {
     async index(request, response) {
@@ -38,7 +37,7 @@ module.exports = {
         const { unidade = 's' } = request.query;
         process.env.TZ = 'America/Sao_Paulo'; // UTC +00:00
         var hj = new Date();
-        hj.setHours(0, 0, 0, 0)
+        hj = new Date(hj.toLocaleString());
         console.log(hj)
         const valores = await connection.pool.query(`select * from medicao 
         where data > '${hj.toISOString()}' 
@@ -77,11 +76,8 @@ module.exports = {
 
     async Intevalo(request, response) {
         const { dias = 1 } = request.query;
-        process.env.TZ = 'America/Sao_Paulo'; // UTC +00:00
         var hj = new Date();
         var dataFim = new Date();
-        hj.setHours(-3, 0, 0, 0)
-        dataFim.setHours(-3, 0, 0, 0)
         dataFim.setDate(hj.getDate() - dias);
         console.log(hj.toISOString());
 
