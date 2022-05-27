@@ -37,6 +37,7 @@ module.exports = {
         const { unidade = 's' } = request.query;
         var hj = new Date(Date.now());
         hj.setHours(1, 0, 0, 0)
+        console.log(hj)
         const valores = await connection.pool.query(`select * from medicao 
         where data > '${hj.toISOString()}' 
         AND unidade = '${unidade}' order by data desc`)
